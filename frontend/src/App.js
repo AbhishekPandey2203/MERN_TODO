@@ -23,12 +23,23 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await getUser();
-      setUser(res.data.user);
-    };
+      try {
+        const res = await getUser();
 
-    fetchData();
-  }, []);
+        // Check if res is not undefined before accessing its properties
+        if (res && res.data && res.data.user) {
+          setUser(res.data.user);
+        } else {
+          // Handle the case when res is undefined or doesn't contain expected data
+          throw new Error("Invalid response received from getUser");
+        }
+      } catch (error) {
+        // Handle any errors that occur during the fetching process
+        console.error("Error fetching user:", error.message);
+        // Optionally, you can set a default user state or handle the error in another way
+      }
+    };
+  });
   return (
     <div className="App bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
       <Navbar user={user}/>
