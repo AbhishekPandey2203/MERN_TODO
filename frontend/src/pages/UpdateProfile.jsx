@@ -23,12 +23,13 @@ const UpdateProfile = () => {
     };
 
     const response = await updateUser(data);
-    if (response.status === 201) {
+    if (response.status === 200) {
       alert("User Updated Successfully");
       setUser(response.data.user);
+      console.log(response);
       navigate("/user/profile");
     } else {
-      alert(response.response.data.msg);
+      alert(response.data.msg);
     }
   };
 

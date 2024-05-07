@@ -24,12 +24,12 @@ const UpdatePassword = () => {
       newPassword: password,
     };
     const response = await updatePassword(data);
-    if (response.status === 201) {
+    if (response.status === 200) {
       alert("Password Updated Successfully");
 
       navigate("/user/profile");
     } else {
-      alert(response.response.data.msg);
+      alert(response.data.msg);
     }
   };
 
