@@ -31,12 +31,15 @@ export const register = async (req, res) => {
 
     // create a token
     const token = jwt.sign(payload, process.env.JWT_SECRET, {
-      expiresIn: 360000,
+      expiresIn: process.env.EXPIRY_DATE,
     });
 
     //creating a cookie and
 
-    res.cookie("token", token, { httOnly: true, expiresIn: 360000 });
+    res.cookie("token", token, {
+      httOnly: true,
+      expiresIn: process.env.EXPIRY_DATE,
+    });
 
     //passwrod
     // we have taken out the passwrod we dont snd the passwrod
@@ -71,12 +74,15 @@ export const login = async (req, res) => {
 
     // create a token
     const token = jwt.sign(payload, process.env.JWT_SECRET, {
-      expiresIn: 360000,
+      expiresIn: process.env.EXPIRY_DATE,
     });
 
     //creating a cookie and
 
-    res.cookie("token", token, { httOnly: true, expiresIn: 360000 });
+    res.cookie("token", token, {
+      httOnly: true,
+      expiresIn: process.env.EXPIRY_DATE,
+    });
 
     //passwrod
     // we have taken out the passwrod we dont snd the passwrod
@@ -91,13 +97,13 @@ export const login = async (req, res) => {
 
 export const logout = async (req, res) => {
   res.clearCookie("token");
-  res.status(200).json({ msg: "User Logged Out Successfully"});
+  res.status(200).json({ msg: "User Logged Out Successfully" });
 };
 
 export const getMe = async (req, res) => {
   try {
     const user = await User.findById(req.user);
-   
+
     if (!user) {
       return res.status(404).json({ msg: "User Not Found" });
     }
@@ -188,7 +194,7 @@ export const deleteUser = async (req, res) => {
       await Todo.deleteMany({ user: req.user });
     }
     res.clearCookie("token");
-    await user.deleteOne();     // the replacement i did here-------
+    await user.deleteOne(); // the replacement i did here-------
     res.status(200).json({ msg: "User deleted Succeefully" });
   } catch (error) {
     console.error(error.message);
