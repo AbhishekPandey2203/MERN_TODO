@@ -6,7 +6,7 @@ import Todo from "../models/Todo.js";
 export const register = async (req, res) => {
   const { name, email, password, age } = req.body;
   try {
-    let user = await User.findOne({ email });
+    const user = await User.findOne({ email });
     //checking the email already exist ,if it return
     if (user) {
       return res.status(400).json({ msg: "User Already Exists" });

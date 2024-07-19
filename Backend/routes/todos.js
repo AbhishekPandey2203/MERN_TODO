@@ -1,3 +1,4 @@
+//importing the express-->
 import express from "express";
 import authorize from "../middleware/authorize.js";
 
@@ -10,6 +11,8 @@ import {
 } from "../controllers/todosController.js";
 import { createTodoRules, updateTodoRules } from "../middleware/validator.js";
 import { validateResult } from "../middleware/validationResults.js";
+   
+// router featuture importing 
 
 const router = express.Router();
 

@@ -19,6 +19,9 @@ import {
 import { validateResult } from "../middleware/validationResults.js";
 const router = express.Router();
 
+  //register function will be define in the controller
+  //validateresult function define in the middleware
+
 router.post("/register", registerRules, validateResult, register);
 
 router.post("/login", loginRules, validateResult, login);

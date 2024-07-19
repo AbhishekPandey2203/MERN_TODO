@@ -12,3 +12,5 @@ const connectionDB = () => {
 };
 
 export default connectionDB;
+
+//define the monogodb url in env

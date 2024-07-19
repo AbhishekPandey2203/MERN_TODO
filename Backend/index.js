@@ -19,10 +19,14 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieParser());
 
-// create
+// creating the api routes to define the what they do
 app.use("/api/todos", todosRoutes);
 app.use("/api/users", usersRoutes);
+
+//server running testing-->
 
 app.listen(process.env.PORT, () =>
   console.log(`Server is running on Port ${process.env.PORT}`)
 );
+
+
