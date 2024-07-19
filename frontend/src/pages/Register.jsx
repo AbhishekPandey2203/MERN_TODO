@@ -41,8 +41,8 @@ const Register = () => {
   };
 
   return (
-    <div className="w-1/4 m-auto text-center">
-      <h1 className="text-3xl my-3 font-bold"> Register</h1>
+    <div className="p-3 max-w-lg mx-auto">
+      <h1 className="text-3xl text-center font-semibold my-7">Register</h1>
       <form onSubmit={submitHandler}>
         <div className="mb-3">
           <input
