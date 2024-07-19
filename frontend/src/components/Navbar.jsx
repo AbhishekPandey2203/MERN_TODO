@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Navbar = ({user}) => {
+const Navbar = ({ user }) => {
   return (
     <nav className="bg-black py-3 text-white flex justify-between items-center">
-      <h1 className="ml-1 font-bold text-2xl">Todo App</h1>
+      <h1 className="ml-1 font-bold text-2xl">Daily-List</h1>
 
       <ul className="flex">
         {user._id && (
