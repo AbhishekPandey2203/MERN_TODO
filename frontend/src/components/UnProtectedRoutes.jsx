@@ -1,14 +1,12 @@
 import { Navigate } from "react-router-dom";
 
+const UnProtectedRoutes = ({ loggedIn, children }) => {
+  //   console.log(loggedIn);
+  if (loggedIn) {
+    return <Navigate to="/" replace />;
+  }
 
-const UnProtectedRoutes =({loggedIn, children})=>{
-    console.log(loggedIn)
-    if(loggedIn)
-    {
-        return <Navigate to="/" replace/>;
-    }
-
-    return children;
-}
+  return children;
+};
 
 export default UnProtectedRoutes;
