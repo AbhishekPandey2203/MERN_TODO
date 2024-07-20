@@ -33,8 +33,8 @@ const UpdateTodo = () => {
   };
 
   return (
-    <div className="w-1/4 m-auto text-center">
-      <h1 className=" text-3xl my-3 font-bold">Update Todo</h1>
+    <div className="p-3 max-w-lg mx-auto">
+      <h1 className="text-3xl text-center font-semibold my-7">Update-Task Detail</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <input

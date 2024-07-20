@@ -49,13 +49,13 @@ const CreateTodo = () => {
   };
 
   return (
-    <div className="w-1/4 m-auto text-center">
-      <h1 className="text-3xl my-3 font-bold"> Create Todo</h1>
+    <div className="p-3 max-w-lg mx-auto">
+      <h1 className="text-3xl text-center font-semibold my-7">Write Task</h1>
       <form onSubmit={submitHandler}>
         <div className="mb-3">
           <input
             type="text"
-            placeholder="Enter Title.."
+            placeholder="Enter Task.."
             className="focus:outline-none border-none p-2 rounded w-full"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -65,6 +65,7 @@ const CreateTodo = () => {
         <div className="mb-3">
           <textarea
             className="focus:outline-none border-none p-2 rounded w-full"
+            placeholder="Description.."
             cols="30"
             rows="5"
             value={description}

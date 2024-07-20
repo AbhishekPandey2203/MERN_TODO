@@ -33,8 +33,8 @@ const Profile = () => {
   };
 
   return (
-    <div className="w-1/4 m-auto text-center">
-      <h1 className="text-3xl my-3 font-bold">Profile</h1>
+    <div className="p-3 max-w-lg mx-auto">
+      <h1 className="text-3xl text-center font-semibold my-7">User-Profile</h1>
       <div className="mt-3">
         <h2 className="text-2xl">Name: {user.name}</h2>
         <h2 className="text-2xl">Email: {user.email}</h2>
