@@ -11,9 +11,8 @@ const Profile = () => {
   const logoutHandler = async (e) => {
     const response = await logout();
     if (response.status === 200) {
-      alert("User logged Out");
-      setUser({});
-      navigate("/user/login");
+      setUser(null);
+      navigate("/");
     } else {
       alert(response.response.data.msg);
     }
@@ -24,7 +23,7 @@ const Profile = () => {
       const response = await deleteUser();
       if (response.status === 200) {
         alert("User Deleted Successfully");
-        setUser({});
+        setUser(null);
         navigate("/user/login");
       } else {
         alert(response.response.data.msg);

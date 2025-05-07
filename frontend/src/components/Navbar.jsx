@@ -1,16 +1,13 @@
 import React from "react";
-import { Link, useHistory} from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const Navbar = ({ user }) => {
-
-  
-    
   return (
     <nav className="bg-black py-3 text-white flex justify-between items-center">
-      <h1  className="ml-1 font-bold text-2xl">Daily-List</h1>
+      <h1 className="ml-1 font-bold text-2xl">Daily-List</h1>
 
       <ul className="flex">
-        {user._id && (
+        {user?._id && (
           <>
             <li className="mr-3">
               <Link className="hover:text-pink-500" to="/">
@@ -30,7 +27,7 @@ const Navbar = ({ user }) => {
             </li>
           </>
         )}
-        {!user._id && (
+        {!user?._id && (
           <>
             <li className="mr-3">
               <Link className="hover:text-pink-500" to="/user/register">

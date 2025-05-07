@@ -80,7 +80,7 @@ export const login = async (req, res) => {
     //creating a cookie and
 
     res.cookie("token", token, {
-      httOnly: true,
+      httpOnly: true,
       expiresIn: process.env.EXPIRY_DATE,
     });
 

@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "./Context/UserContext";
 import { getUser } from "./apiCalls/user";
 import LoggedInHome from "./pages/LoggedInHome";
@@ -18,41 +18,40 @@ import ViewTodo from "./pages/ViewTodo";
 import UpdateTodo from "./pages/UpdateTodo";
 
 function App() {
-  //
-  const { user, setUser} = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
+  const [loading, setLoading] = useState(true); // to prevent rendering routes before user is fetched
 
   const fetchData = async () => {
     try {
       const res = await getUser();
-
-      // Check if res is not undefined before accessing its properties
-      if (res && res.data && res.data.user) {
+      if (res?.data?.user) {
         setUser(res.data.user);
       } else {
-        // Handle the case when res is undefined or doesn't contain expected data
-        throw new Error("Invalid response received from getUser");
+        setUser(null);
       }
     } catch (error) {
-      // Handle any errors that occur during the fetching process
       console.error("Error fetching user:", error.message);
-      // Optionally, you can set a default user state or handle the error in another way
+      setUser(null);
+    } finally {
+      setLoading(false); // loading is complete
     }
   };
 
   useEffect(() => {
-    fetchData()
-  });
+    fetchData();
+  }, []);
 
+  if (loading) return <div>Loading...</div>; // prevent crashes on first load
 
   return (
-    <div >
-      <Navbar user={user}/>
+    <div>
+      <Navbar user={user} />
       <Routes>
-        <Route path="/" element={user._id ? <LoggedInHome /> : <Home />} />
+        <Route path="/" element={user?._id ? <LoggedInHome /> : <Home />} />
         <Route
           path="/user/register"
           element={
-            <UnProtectedRoutes loggedIn={user._id ? true : false}>
+            <UnProtectedRoutes loggedIn={!!user?._id}>
               <Register />
             </UnProtectedRoutes>
           }
@@ -60,71 +59,59 @@ function App() {
         <Route
           path="/user/login"
           element={
-            <UnProtectedRoutes loggedIn={user._id ? true : false}>
+            <UnProtectedRoutes loggedIn={!!user?._id}>
               <Login />
             </UnProtectedRoutes>
           }
         />
-
         <Route
           path="/user/profile"
           element={
-            <ProtectedRoutes loggedIn={user._id ? true : false}>
+            <ProtectedRoutes loggedIn={!!user?._id}>
               <Profile />
             </ProtectedRoutes>
           }
         />
-
         <Route
           path="/todo/create"
           element={
-            <ProtectedRoutes loggedIn={user._id ? true : false}>
+            <ProtectedRoutes loggedIn={!!user?._id}>
               <CreateTodo />
             </ProtectedRoutes>
           }
         />
-
         <Route
           path="/user/update"
           element={
-            <ProtectedRoutes loggedIn={user._id ? true : false}>
+            <ProtectedRoutes loggedIn={!!user?._id}>
               <UpdateProfile />
             </ProtectedRoutes>
           }
         />
-
         <Route
           path="/user/updatepassword"
           element={
-            <ProtectedRoutes loggedIn={user._id ? true : false}>
+            <ProtectedRoutes loggedIn={!!user?._id}>
               <UpdatePassword />
             </ProtectedRoutes>
           }
         />
-
-<Route
+        <Route
           path="/todo/view/:id"
           element={
-            <ProtectedRoutes loggedIn={user._id ? true : false}>
+            <ProtectedRoutes loggedIn={!!user?._id}>
               <ViewTodo />
             </ProtectedRoutes>
           }
         />
-
-
-
-<Route
+        <Route
           path="/todo/update/:id"
           element={
-            <ProtectedRoutes loggedIn={user._id ? true : false}>
-            <UpdateTodo/>
+            <ProtectedRoutes loggedIn={!!user?._id}>
+              <UpdateTodo />
             </ProtectedRoutes>
           }
         />
-
-
-
-
       </Routes>
     </div>
   );
