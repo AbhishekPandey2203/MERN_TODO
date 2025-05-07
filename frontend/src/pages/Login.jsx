@@ -9,27 +9,23 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const {user,setUser}= useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
-  const navigate =useNavigate();
+  const navigate = useNavigate();
 
-
-  const submitHandler =async(e)=>{
+  const submitHandler = async (e) => {
     e.preventDefault();
 
-    const data= {email,password};
-    const response= await login(data);
-    if(response.status===200)
-    { 
+    const data = { email, password };
+    const response = await login(data);
+    if (response.status === 200) {
       alert("User logged In");
       setUser(response.data.user);
-    navigate("/"); 
-    }
-    else
-    {
+      navigate("/");
+    } else {
       alert(response.response.data.msg);
     }
-  }
+  };
   return (
     <div className="p-3 max-w-lg mx-auto">
       <h1 className="text-3xl text-center font-semibold my-7">Login</h1>
@@ -58,7 +54,7 @@ const Login = () => {
           type="submit"
           className="bg-black text-white w-full py-2 rounded"
         >
-          Login
+          Login Page
         </button>
       </form>
     </div>
